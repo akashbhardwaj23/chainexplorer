@@ -12,7 +12,7 @@ app.use(express.json());
 
 const blocks: Number[] = [];
 
-app.get("/getTransaction", async (req, res) => {
+app.get("/getBlocks", async (req, res) => {
   const blockNumber = await getLatestBlockNumber();
 
   if (blocks.length > 20) {
