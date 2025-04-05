@@ -11,6 +11,7 @@ import {
 } from "@repo/ui/components/ui/table";
 
 import { Fuel, Package } from "lucide-react";
+import { IconCurrencyEthereum, IconCurrencySolana } from "@tabler/icons-react";
 import {
   useEthereumBlocks,
   useEthereumPrice,
@@ -20,7 +21,13 @@ import {
 
 type Type = "Ethereum" | "Solana";
 
-export function CardComponent({ name }: { name: Type }) {
+export function CardComponent({
+  name,
+  className,
+}: {
+  name: Type;
+  className?: string;
+}) {
   const formatTime = (seconds: number) => {
     if (seconds < 60) {
       return `${Math.floor(seconds)} seconds`;
@@ -40,36 +47,44 @@ export function CardComponent({ name }: { name: Type }) {
     const { error, isLoading, data } = useEthereumPrice();
     const { blockLoading, blocksData } = useEthereumBlocks();
 
-    // do state management
-
     if (isLoading || blockLoading) {
       return <div>loading</div>;
     }
 
     return (
-      <CardContainer className="inter-var">
-        <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-          <CardItem translateZ="50" className="text-xl font-bold">
-            Ethereum
+      <CardContainer className={`inter-var ${className}`}>
+        <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+          <CardItem translateZ="50" className="flex text-xl font-bold gap-2">
+            Ethereum     <IconCurrencyEthereum className="w-6 h-6" />
           </CardItem>
-          <CardItem as="div" translateZ="60" className="sm:text-lg text-sm max-w-sm mt-2 shadow p-4">
-            <div className="flex items-center gap-2">
-             <p> Price :{" "}
-              <p className="text-green-500/80">
+          <CardItem
+            as="div"
+            translateZ="60"
+            className="text-lg max-w-sm mt-2 shadow p-4 dark:p-2"
+          >
+            <div className="flex items-center gap-4">
+              <p className="flex gap-2">
                 {" "}
-                ${Number(data?.value.value).toFixed(2)}
-              </p></p>
-              <span className="flex justify-center items-center ml-4">
-                <Fuel className="w-6 h-6 mr-1.5" /> Gas : {" "}
-                <span className="text-green-700/80 dark:text-green-300/80 "> {Number(data?.currentGasPrice).toFixed(3).toString()} Gwei</span>
-              </span>
+                Price :{" "}
+                <p className="text-green-500/80">
+                  {" "}
+                  ${Number(data?.value.value).toFixed(2)}
+                </p>
+              </p>
+              <p className="flex justify-center items-center gap-2">
+                <Fuel className="w-6 h-6" /> Gas :{" "}
+                <p className="text-blue-500/80 dark:text-blue-400/80 ">
+                  {" "}
+                  {Number(data?.currentGasPrice).toFixed(3).toString()} Gwei
+                </p>
+              </p>
             </div>
           </CardItem>
           <CardItem translateZ="100" className="w-full mt-4">
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-muted-foreground">
-                  <TableHead className="text-left p-2">Latest Block</TableHead>
+                  <TableHead className="text-left p-2">Latest 5 Block</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -109,29 +124,33 @@ export function CardComponent({ name }: { name: Type }) {
     return (
       <CardContainer className="inter-var">
         <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-          <CardItem translateZ="50" className="text-xl font-bold">
-            Solana
+          <CardItem translateZ="50" className="flex text-xl font-bold gap-2">
+            Solana <IconCurrencySolana className="w-6 h-6" />
           </CardItem>
-          <CardItem as="div" translateZ="60" className="text-lg max-w-sm mt-2 shadow p-4">
+          <CardItem
+            as="div"
+            translateZ="60"
+            className="text-lg max-w-sm mt-2 shadow p-4"
+          >
             <div className="flex items-center gap-2">
               Curculating Sol :{" "}
               <p className="font-bold text-green-500/80">
                 {" "}
                 ${Math.floor(Number(data?.value.circulating) / 10 ** 9)}
               </p>
-              </div>
-              <div className="flex items-center gap-2">
-                Non Circulating Sol :{" "}
-                <span className="font-bold text-green-700/80 dark:text-green-300/80 ">
-                  $ {Math.floor(Number(data?.value.nonCirculating) / 10 ** 9)}
-                </span>
+            </div>
+            <div className="flex items-center gap-2">
+              Non Circulating Sol :{" "}
+              <span className="font-bold text-green-700/80 dark:text-green-300/80 ">
+                $ {Math.floor(Number(data?.value.nonCirculating) / 10 ** 9)}
+              </span>
             </div>
           </CardItem>
           <CardItem translateZ="100" className="w-full mt-4">
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-muted-foreground">
-                  <TableHead className="text-left p-2">Latest Block</TableHead>
+                  <TableHead className="text-left p-2">Latest 5 Block</TableHead>
                 </TableRow>
               </TableHeader>
 
