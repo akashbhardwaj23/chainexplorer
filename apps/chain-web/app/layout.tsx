@@ -13,6 +13,7 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
 });
 
+
 export const metadata: Metadata = {
   title: "ChainExplorer",
   description: "Shows the price and blocks mined on different blockchains",
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
   }
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-poppins`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-poppins min-h-screen`}>
         <QueryProvider>
         <Navbar />
         {children}
