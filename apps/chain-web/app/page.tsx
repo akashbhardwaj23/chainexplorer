@@ -26,7 +26,7 @@ export default function Home() {
           repeat: Infinity,
           duration: 2,
           repeatType: "loop"
-        }} className="absolute right-40 top-40 rotate-[30deg] border border-border shadow-[19px_20px_0px_0px_rgba(0,_0,_0,_0.8)]">
+        }} className="absolute right-40 top-40 rotate-[30deg] border-2 border-foreground shadow-[19px_20px_0px_0px_rgba(0,_0,_0,_0.8)]">
           <IconCurrencySolana className="w-60 h-60" />
         </motion.div>
 
@@ -36,7 +36,7 @@ export default function Home() {
           repeat: Infinity,
           duration: 2,
           repeatType: "loop"
-        }} className="absolute left-12 -top-20 -rotate-[20deg] border border-border shadow-[-19px_20px_0px_0px_rgba(0,_0,_0,_0.8)]">
+        }} className="absolute left-12 -top-20 -rotate-[20deg] border-2 border-foreground shadow-[-19px_20px_0px_0px_rgba(0,_0,_0,_0.8)]">
           <IconCurrencyEthereum className="w-60 h-60" />
         </motion.div>
       </div>

@@ -44,7 +44,7 @@ export default function Videocard(){
             {/* <div className="flex items-center mb-4">
                 <h1 className="text-5xl">Made for All</h1>
             </div> */}
-                <motion.div className="shadow-[19px_20px_0px_0px_rgba(0,_0,_0,_0.8)]" initial={{
+                <motion.div className="shadow-[10px_12px_0px_0px_rgba(0,_0,_0,_0.8)]" initial={{
                     z: 0
                 }} whileInView={{
                     z:100
