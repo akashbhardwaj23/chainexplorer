@@ -1,13 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import {useQuery} from "@tanstack/react-query"
 
 const BACKEND_URL = "http://localhost:8080";
 
-
-
-
-interface SolanaDataType {
+export interface SolanaDataType {
     value : {
         circulating : string,
         nonCirculating : string
@@ -28,7 +24,7 @@ export function useSolanaPrice() {
   };
 }
 
-interface SolanaBlocksType {
+export interface SolanaBlocksType {
     value : string
     blockTime : string
 }
