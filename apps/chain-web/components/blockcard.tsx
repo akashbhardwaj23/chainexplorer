@@ -18,37 +18,21 @@ import {
   useSolanaBlocks,
   useSolanaPrice,
 } from "../hooks/useChain";
+import { formatTime } from "../lib/fomattime";
+import { Loading } from "./loading";
 
 type Type = "Ethereum" | "Solana";
 
-export function CardComponent({
-  name,
+export function EthereumCard({
   className,
 }: {
-  name: Type;
   className?: string;
 }) {
-  const formatTime = (seconds: number) => {
-    if (seconds < 60) {
-      return `${Math.floor(seconds)} seconds`;
-    } else if (seconds < 3600) {
-      const minutes = Math.floor(seconds / 60);
-      return `${minutes} minutes`;
-    } else if (seconds < 86400) {
-      const hours = Math.floor(seconds / 3600);
-      return `${hours} hours`;
-    } else {
-      const days = Math.floor(seconds / 86400);
-      return `${days} days`;
-    }
-  };
-
-  if (name === "Ethereum") {
     const { error, isLoading, data } = useEthereumPrice();
     const { blockLoading, blocksData } = useEthereumBlocks();
 
     if (isLoading || blockLoading) {
-      return <div>loading</div>;
+      return <div>Loading...</div>;
     }
 
     return (
@@ -110,15 +94,15 @@ export function CardComponent({
         </CardBody>
       </CardContainer>
     );
-  }
+}
 
-  if (name === "Solana") {
+export function SolanaCard(){
     const { error, data, isLoading } = useSolanaPrice();
 
     const { blocksData, blocksLoading } = useSolanaBlocks();
 
     if (isLoading || blocksLoading) {
-      return <div>Loading</div>;
+      return <Loading />
     }
 
     return (
@@ -178,5 +162,4 @@ export function CardComponent({
         </CardBody>
       </CardContainer>
     );
-  }
 }
