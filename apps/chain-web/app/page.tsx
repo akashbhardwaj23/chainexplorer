@@ -3,8 +3,10 @@ import { IconCurrencyEthereum, IconCurrencySolana } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import Videocard from "../components/sections/videocard";
 import Features from "../components/sections/feature";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
   return (
     <div className="h-full relative mt-40">
       <div className="max-w-4xl flex flex-col justify-center items-center gap-10 mx-auto h-full">
@@ -17,9 +19,22 @@ export default function Home() {
             delay: 0.3,
             ease: [0.5, 0.71, 1, 1.5],
           }}
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileHover={{ scale: 1.2 }} className="bg-clip-text text-transparent bg-gradient-to-br from-orange-600 to-blue-600">BlockChain Scanning Solution</motion.span></motion.h2>
-          <button className="bg-foreground text-background text-2xl px-4 py-2 shadow-[10px_12px_0px_0px_rgba(0,_0,_0,_0.8)] cursor-pointer">Get Started</button>
+         className="bg-clip-text text-transparent bg-gradient-to-br from-orange-600 to-blue-600">BlockChain Scanning Solution</motion.span></motion.h2>
+        <motion.button
+          initial={{
+            opacity: 0
+          }}
+          animate={{
+            opacity: 1
+          }}
+          whileHover={{
+            scale: 1.05
+          }}
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+          className="bg-foreground text-background text-2xl px-4 py-2 shadow-[10px_12px_0px_0px_rgba(0,_0,_0,_0.8)] cursor-pointer" onClick={() => router.push('/explorer')}>Get Started</motion.button>
         <motion.div animate={{
           scale: [1, 0.95, 1]
         }} transition={{

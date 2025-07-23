@@ -5,7 +5,7 @@ export default function Features() {
 
     // TODO : MAKE A COMPONENT OUT OF IT AND USE DRY PRINCIPLES
     return (
-        <div className="min-h-screen max-w-4xl mx-auto">
+        <div className="min-h-screen max-w-6xl mx-auto">
             <div className="flex flex-col gap-10">
                 <h1 className="text-5xl font-semibold">Features</h1>
                 <div className="grid grid-cols-3 justify-between items-center gap-4">
@@ -16,8 +16,8 @@ export default function Features() {
                             duration: 0.3,
                             ease: "easeInOut"
                         }}
-                        className="h-80 w-60 flex flex-col items-center border-2 border-foreground px-2 py-4 cursor-pointer shadow-[10px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
-                        <div className="flex justify-center border border-border w-fit mb-4 rotate-12">
+                        className="h-80 w-80 flex flex-col items-center border-2 border-foreground p-4 cursor-pointer shadow-[10px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
+                        <div className="flex justify-center w-fit mb-8 rotate-12 border border-foreground">
                             <IconCurrencySolana className="w-20 h-20" />
                         </div>
                         <ul className="pl-4">
@@ -32,7 +32,7 @@ export default function Features() {
                         transition={{
                             duration: 0.3,
                             ease: "easeInOut"
-                        }} className="h-80 w-60 flex flex-col items-center border-2 border-foreground px-2 py-4 cursor-pointer shadow-[0px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
+                        }} className="h-80 w-80 flex flex-col items-center border-2 border-foreground px-2 py-4 cursor-pointer shadow-[0px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
 
                         
                     </motion.div>
@@ -42,8 +42,8 @@ export default function Features() {
                         transition={{
                             duration: 0.3,
                             ease: "easeInOut"
-                        }} className="h-80 w-60 flex flex-col items-center border-2 border-foreground px-2 py-4 cursor-pointer shadow-[-10px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
-                        <div className="flex justify-center border border-border w-fit mb-4 -rotate-10">
+                        }} className="h-80 w-80 flex flex-col items-center border-2 border-foreground p-4 cursor-pointer shadow-[-10px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
+                        <div className="flex justify-center border border-foreground w-fit mb-8 -rotate-10">
                             <IconCurrencyEthereum className="w-20 h-20" />
                         </div>
                         <ul className="pl-4">
@@ -75,7 +75,7 @@ function FeatureCard({
                 duration: 0.3,
                 ease: "easeInOut"
             }}
-            className="h-80 w-60 flex flex-col items-center border-2 border-foreground px-2 py-4 shadow-[10px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
+            className="h-80 w-80 flex flex-col items-center border-2 border-foreground px-2 py-4 shadow-[10px_15px_0px_0px_rgba(0,_0,_0,_0.8)]">
             <div className="flex justify-center border border-border w-fit mb-4 rotate-12">
                 <IconCurrencySolana className="w-20 h-20" />
             </div>
