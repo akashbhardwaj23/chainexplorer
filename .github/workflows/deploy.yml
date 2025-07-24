@@ -34,8 +34,8 @@ jobs:
           git clone https://github.com/akashbhardwaj23/ops.git
           cd ops
           sed -i 's|image: akashbhardwaj24/chainexplorer:.*|image: akashbhardwaj24/chainexplorer:${{ github.sha }}|' staging/chainexplorer/deployment.yml
-          git config user.name "Github Action Bot"
-          git config user.email "github@actionbot.com"
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
           git add staging/chainexplorer/deployment.yml
-          git commit -m "Updated Image chainexplorer to ${{ github.sha }}"
+          git commit -m "Update chainexplorer image to ${{ github.sha }}"
           git push https://${PAT}@github.com/akashbhardwaj23/ops.git main
