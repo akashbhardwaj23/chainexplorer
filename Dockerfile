@@ -1,3 +1,11 @@
 FROM node:alpine
 
-WORKDIR app
+WORKDIR chainexplorer
+
+COPY . .
+
+RUN npm i -g bun
+
+RUN bun install
+
+CMD ["bun", "run", "dev"]
