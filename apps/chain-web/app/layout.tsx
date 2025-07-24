@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-poppins min-h-screen`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-poppins min-h-screen dark:bg-[#161616]`}>
         <QueryProvider>
         <Navbar />
         {children}

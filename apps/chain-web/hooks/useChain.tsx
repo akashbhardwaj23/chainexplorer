@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query"
+import type {EthBlocksType, SolBlocksType} from "@repo/common/type"
 
 const BACKEND_URL = "http://localhost:8080";
 
@@ -24,17 +25,12 @@ export function useSolanaPrice() {
   };
 }
 
-export interface SolanaBlocksType {
-    value : string
-    blockTime : string
-}
-
 
 export function useSolanaBlocks(){
     const {error, data, isLoading} = useQuery({queryKey : ['sol-blocks'], queryFn : async () => {
         const response = await axios.get(`${BACKEND_URL}/getSolBlocks`)
         
-        const data : SolanaBlocksType[]  = response.data.blocks;
+        const data : SolBlocksType[]  = response.data.blocks;
 
         return data
 
@@ -52,11 +48,6 @@ export interface EthereumDataType {
   value: string;
 }
 
-
-export interface EthereumBlocksType {
-    value : string
-    blockTime : number
-}
 
 export function useEthereumPrice(){
     const {error, data, isLoading} = useQuery({queryKey : ['eth-price'], queryFn : async () => {
@@ -85,7 +76,7 @@ export function useEthereumPrice(){
 export function useEthereumBlocks() {
     const {error, isLoading, data} = useQuery({queryKey : ["eth-blocks"], queryFn : async () => {
         const response = await axios.get(`${BACKEND_URL}/getEthBlocks`)
-        const data : EthereumBlocksType[] = response.data.blocks
+        const data : EthBlocksType[] = response.data.blocks
         return data;
     }, refetchInterval: 2000})
 

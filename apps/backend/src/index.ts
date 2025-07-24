@@ -1,17 +1,17 @@
 import express from "express";
-import axios from "axios";
 import dotenv from "dotenv";
 import cors from "cors";
-import { getCurrentEthGasPrice, getEthCurrentPrice, getLatestEthBlockNumber } from "./lib";
-import type { EthBlocksType, SolBlocksType } from "./type";
-import { getLatestSolanaBlock, getSolanaTokenSupply } from "./solana";
+import { getCurrentEthGasPrice, getEthBlockLatest, getEthCurrentPrice, getLatestEthBlockNumber } from "./lib";
+import type { EthBlocksType, SolBlocksType, SymbolType } from "@repo/common/type"
+import { getBlockDetails, getLatestSolanaBlock, getSolanaTokenSupply } from "./solana";
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
+app.use(cors());
+
+app.use(express.json());
 
 const ethBlocks: EthBlocksType[] = [];
 
@@ -21,12 +21,12 @@ const solBlocks: SolBlocksType[] = []
 app.get("/getEthBlocks", async (req, res) => {
   const blockNumber = await getLatestEthBlockNumber()
 
-  console.log(blockNumber)
+  const newBlock = await getEthBlockLatest()
 
-  if(ethBlocks.find((block) => block.value === Number(blockNumber).toString())){
+  if (ethBlocks.find((block) => block.value.number === Number(blockNumber).toString())) {
     res.json({
-      message : "Block Already present",
-      blocks : ethBlocks
+      message: "Block Already present",
+      blocks: ethBlocks
     })
     return
   }
@@ -34,51 +34,55 @@ app.get("/getEthBlocks", async (req, res) => {
     ethBlocks.pop();
   }
   ethBlocks.unshift({
-    value : Number(blockNumber).toString(),
-    blockTime : Date.now()
+    value: newBlock,
+    blockTime: Date.now()
   });
 
   res.json({
-    blockNumber,
-    blocks : ethBlocks
+    blocks: ethBlocks
   });
 });
 
 
 app.get("/getSolBlocks", async (req, res) => {
-    const slotNumber = await getLatestSolanaBlock();
+  const slotNumber = await getLatestSolanaBlock();
+
+  const newBlock = await getBlockDetails()
 
 
-    if(solBlocks.find((block) => block.value === slotNumber.toString())){
-      res.json({
-        message : "Block Already Present",
-        blocks : solBlocks
-      })
-      return
-    }
-
-    if(solBlocks.length > 5){
-      solBlocks.pop()
-    }
-
-    solBlocks.unshift({
-      value : slotNumber.toString(),
-      blockTime : Date.now()
-    })
-
+  if (solBlocks.find((block) => Number(block.value?.parentSlot) === slotNumber)) {
     res.json({
-      slotNumber,
-      blocks : solBlocks
+      message: "Block Already Present",
+      blocks: solBlocks
     })
+    return
+  }
+
+  if (solBlocks.length > 5) {
+    solBlocks.pop()
+  }
+
+  if (newBlock) {
+    //@ts-ignore
+    solBlocks.unshift({ value: newBlock,
+      blockTime: Date.now()
+    })
+  }
+
+  res.json({
+    blocks: solBlocks
+  })
 })
 
 app.get("/getEthValue/:symbol", async (req, res) => {
-  const symbol = req.params.symbol;
+  const symbol = req.params.symbol as SymbolType;
 
-  //@ts-ignore
   const data = await getEthCurrentPrice(symbol)
   const currentGasPrice = await getCurrentEthGasPrice()
 
+
+
+  
   res.json({
     data,
     currentGasPrice
@@ -89,7 +93,7 @@ app.get("/getEthValue/:symbol", async (req, res) => {
 app.get("/getSolValue", async (req, res) => {
   const value = await getSolanaTokenSupply();
 
-    res.json(value)
+  res.json(value)
 })
 
 
